@@ -5,7 +5,10 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.SurfaceView;
+import android.view.View;
 
 public class CakeView extends SurfaceView {
 
@@ -16,6 +19,9 @@ public class CakeView extends SurfaceView {
     Paint outerFlamePaint = new Paint();
     Paint innerFlamePaint = new Paint();
     Paint wickPaint = new Paint();
+    Paint balloonLine = new Paint();
+    //Paint var for textPaint
+    Paint textPaint = new Paint();
 
     Paint checkerPaint1 = new Paint();
     Paint checkerPaint2 = new Paint();
@@ -36,6 +42,8 @@ public class CakeView extends SurfaceView {
     public static final float wickWidth = 6.0f;
     public static final float outerFlameRadius = 30.0f;
     public static final float innerFlameRadius = 15.0f;
+    public static final float balloonHeight = 140.0f;
+    public static final float balloonWidth = 100.0f;
 
     public static final float checkerSize = 60.0f;
 
@@ -68,6 +76,9 @@ public class CakeView extends SurfaceView {
         innerFlamePaint.setStyle(Paint.Style.FILL);
         wickPaint.setColor(Color.BLACK);
         wickPaint.setStyle(Paint.Style.FILL);
+        //Set textPaint
+        textPaint.setColor(Color.RED);
+        textPaint.setTextSize(150);
         checkerPaint1.setColor(Color.GREEN);
         checkerPaint1.setStyle(Paint.Style.FILL);
         checkerPaint2.setColor(Color.RED);
@@ -150,12 +161,31 @@ public class CakeView extends SurfaceView {
         for(int i = 1; i <= cakeModel.candleCount; i++){
             drawCandle(canvas, cakeLeft + (i * cakeWidth / (cakeModel.candleCount+1)) - (candleWidth / 2), cakeTop);
         }
+        //Drawing Red Text
+        canvas.drawText("" + cakeModel.getX_cord() + ", " + cakeModel.getY_cord(), 700, 500, textPaint);
 
         //draw checker board
         if (cakeModel.getShowChecker()) {
             drawChecker(canvas, cakeModel.getCheckerX(), cakeModel.getCheckerY());
         }
+
+        //Calls drawBalloon
+        if (cakeModel.balloonDraw == true){
+            drawBalloon(canvas, cakeModel.balloonX, cakeModel.balloonY);
+        }
     }//onDraw
+
+    public void drawBalloon(Canvas canvas, int x, int y)
+    {
+        //Sets color to blue
+        balloonLine.setColor(Color.BLUE);
+        //draws the balloon itself
+        canvas.drawOval(x - balloonWidth/2, y - balloonHeight/2, x+balloonWidth/2, y+balloonHeight/2, balloonLine);
+        //Sets color to black
+        balloonLine.setColor(Color.BLACK);
+        //Draws the balloon string
+        canvas.drawLine(x,y+balloonHeight/2, x, y+balloonHeight/2+100, balloonLine);
+    }
 
 }//class CakeView
 
