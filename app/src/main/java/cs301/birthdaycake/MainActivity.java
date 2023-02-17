@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         CakeView theCake = findViewById(R.id.cakeview);
         CakeController newCake = new CakeController(theCake);
+        theCake.setOnTouchListener(newCake);
         Button blowOutButton = findViewById(R.id.button2);
         blowOutButton.setOnClickListener(newCake);
         Switch candlesSwitch = findViewById(R.id.switch2);

@@ -17,6 +17,9 @@ public class CakeView extends SurfaceView {
     Paint innerFlamePaint = new Paint();
     Paint wickPaint = new Paint();
 
+    Paint checkerPaint1 = new Paint();
+    Paint checkerPaint2 = new Paint();
+
     /* These constants define the dimensions of the cake.  While defining constants for things
         like this is good practice, we could be calculating these better by detecting
         and adapting to different tablets' screen sizes and resolutions.  I've deliberately
@@ -33,6 +36,8 @@ public class CakeView extends SurfaceView {
     public static final float wickWidth = 6.0f;
     public static final float outerFlameRadius = 30.0f;
     public static final float innerFlameRadius = 15.0f;
+
+    public static final float checkerSize = 60.0f;
 
     private CakeModel cakeModel;
 
@@ -63,11 +68,22 @@ public class CakeView extends SurfaceView {
         innerFlamePaint.setStyle(Paint.Style.FILL);
         wickPaint.setColor(Color.BLACK);
         wickPaint.setStyle(Paint.Style.FILL);
+        checkerPaint1.setColor(Color.GREEN);
+        checkerPaint1.setStyle(Paint.Style.FILL);
+        checkerPaint2.setColor(Color.RED);
+        checkerPaint2.setStyle(Paint.Style.FILL);
+
 
         setBackgroundColor(Color.WHITE);  //better than black default
 
         cakeModel = new CakeModel();
 
+    }
+
+    public void drawChecker(Canvas c, float x, float y) {
+        c.drawRect(x-checkerSize, y-checkerSize,x+checkerSize,y+checkerSize, checkerPaint1);
+        c.drawRect(x-checkerSize, y-checkerSize,x,y, checkerPaint2);
+        c.drawRect(x, y,x+checkerSize,y+checkerSize, checkerPaint2);
     }
 
     /**
@@ -133,6 +149,11 @@ public class CakeView extends SurfaceView {
         //Now a candle in the center
         for(int i = 1; i <= cakeModel.candleCount; i++){
             drawCandle(canvas, cakeLeft + (i * cakeWidth / (cakeModel.candleCount+1)) - (candleWidth / 2), cakeTop);
+        }
+
+        //draw checker board
+        if (cakeModel.getShowChecker()) {
+            drawChecker(canvas, cakeModel.getCheckerX(), cakeModel.getCheckerY());
         }
     }//onDraw
 

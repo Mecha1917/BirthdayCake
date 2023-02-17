@@ -7,6 +7,30 @@ public class CakeModel {
     public boolean frosting = true;
     public boolean hasCandles = true;
 
+    private float checkerXPos;
+    private float checkerYPos;
+    private boolean showChecker = false;
+
+    public void setCheckerPos(float x, float y) {
+        this.checkerXPos = x;
+        this.checkerYPos = y;
+    }
+
+    public float getCheckerX() {
+        return checkerXPos;
+    }
+    public float getCheckerY() {
+        return checkerYPos;
+    }
+
+    public void setShowChecker(boolean b) {
+        this.showChecker = b;
+    }
+
+    public boolean getShowChecker() {
+        return showChecker;
+    }
+
     public void setCandlesLit(boolean input) {
         candlesLit = input;
     }
