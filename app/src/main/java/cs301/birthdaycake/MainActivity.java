@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
         candlesSwitch.setOnCheckedChangeListener(newCake);
         SeekBar candlesCount = findViewById(R.id.seekBar2);
         candlesCount.setOnSeekBarChangeListener(newCake);
+
+        //Setting onTouchListener that we created in CakeController for Red Text
         theCake.setOnTouchListener(newCake);
     }
 
