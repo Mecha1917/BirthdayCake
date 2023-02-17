@@ -146,7 +146,7 @@ public class CakeView extends SurfaceView {
             drawCandle(canvas, cakeLeft + (i * cakeWidth / (cakeModel.candleCount+1)) - (candleWidth / 2), cakeTop);
         }
         //Drawing Red Text
-        canvas.drawText("" + cakeModel.getX_cord() + ", " + cakeModel.getY_cord(), 1600, 1000, textPaint);
+        canvas.drawText("" + cakeModel.getX_cord() + ", " + cakeModel.getY_cord(), 700, 500, textPaint);
 
         //Calls drawBalloon
         if (cakeModel.balloonDraw == true){
